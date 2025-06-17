@@ -1,0 +1,30 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build Docker image
+        run: docker build -t ${{ secrets.DOCKER_USER }}/my-service:${{ github.sha }} .
+
+      - name: Push Docker image
+        run: |
+          echo "${{ secrets.DOCKER_PASS }}" | docker login -u "${{ secrets.DOCKER_USER }}" --password-stdin
+          docker push ${{ secrets.DOCKER_USER }}/diplomado:${{ github.sha }}
+
+      - name: Update Helm values and commit
+        run: |
+          sed -i "s/tag: .*/tag: ${{ github.sha }}/" helm/my-service-chart/values.yaml
+          git config user.email "ci@github.com"
+          git config user.name "CI Bot"
+          git commit -am "Update image tag to ${{ github.sha }}"
+          git push
