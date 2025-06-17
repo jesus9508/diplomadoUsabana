@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/jesus9508/diplomadoUsabana.git
     targetRevision: master
-    path: helm/c
+    path: helm/diplomado-chart
   destination:
     server: https://kubernetes.default.svc
     namespace: default
