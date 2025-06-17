@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: my-service
+  name: diplomado
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://github.com/jesus9508/diplomadoUsabana.git
     targetRevision: main
-    path: helm/diplomado-chart
+    path: helm/c
   destination:
     server: https://kubernetes.default.svc
     namespace: default
