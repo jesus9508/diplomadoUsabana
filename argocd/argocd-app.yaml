@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/jesus9508/diplomadoUsabana.git
-    targetRevision: main
+    targetRevision: master
     path: helm/c
   destination:
     server: https://kubernetes.default.svc
