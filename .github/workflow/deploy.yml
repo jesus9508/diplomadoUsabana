@@ -23,7 +23,7 @@ jobs:
 
       - name: Update Helm values and commit
         run: |
-          sed -i "s/tag: .*/tag: ${{ github.sha }}/" helm/my-service-chart/values.yaml
+          sed -i "s/tag: .*/tag: ${{ github.sha }}/" helm/diplomado-chart/values.yaml
           git config user.email "ci@github.com"
           git config user.name "CI Bot"
           git commit -am "Update image tag to ${{ github.sha }}"
